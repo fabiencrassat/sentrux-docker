@@ -8,16 +8,10 @@ RUN apt-get update \
         curl \
         ca-certificates \
         libgtk-3-0 \
-        libx11-xcb1 \
-        libxkbcommon-x11-0 \
-        libgl1-mesa-glx \
-        libgl1-mesa-dri \
-        libegl1 \
-        libgles2 \
-        libgbm1 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL https://raw.githubusercontent.com/sentrux/sentrux/main/install.sh | sh
+# Language grammars are preloaded during the build process so the container does not need a first-run grammar download.
 RUN sentrux --version
 
 # Runtime stage: use Debian slim and install the GTK runtime dependencies.
